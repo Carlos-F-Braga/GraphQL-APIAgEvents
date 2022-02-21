@@ -19,7 +19,9 @@
   "homepage": "https://github.com/Carlos-F-Braga/GraphQL-APITeste#readme",
   "dependencies": {
     "body-parser": "^1.19.2",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.8.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
