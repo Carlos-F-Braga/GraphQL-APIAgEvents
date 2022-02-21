@@ -1,0 +1,27 @@
+{
+  "name": "graphql-api---booking-application",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Carlos-F-Braga/GraphQL-APITeste.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Carlos-F-Braga/GraphQL-APITeste/issues"
+  },
+  "homepage": "https://github.com/Carlos-F-Braga/GraphQL-APITeste#readme",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
