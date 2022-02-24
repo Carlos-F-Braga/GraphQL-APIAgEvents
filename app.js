@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const graphqlHttp = require('express-graphql').graphqlHTTP;
 //const { graphqlHTTP } = require('express-graphql'); Outra opção
 const { buildSchema } = require('graphql');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -61,4 +62,15 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-app.listen(3000);
+
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
+    process.env.MONGO_PASSWORD
+}@cluster0.j1jgx.mongodb.net/test?retryWrites=true`
+).then(() => {
+    app.listen(3000);
+    console.log("eae");
+}).catch(err => {
+    console.log(err);
+})
+
+
