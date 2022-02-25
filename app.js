@@ -65,12 +65,13 @@ app.use('/graphql', graphqlHttp({
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
     process.env.MONGO_PASSWORD
-}@cluster0.j1jgx.mongodb.net/test?retryWrites=true`
+}@cluster0.38xfe.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
 ).then(() => {
     app.listen(3000);
     console.log("eae");
 }).catch(err => {
     console.log(err);
 })
+
 
 
