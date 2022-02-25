@@ -121,7 +121,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
 }@cluster0.38xfe.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
 ).then(() => {
     app.listen(3000);
-    console.log("eae");
+    console.log("Funcionando Corretamente - Conexão Estabelecida com Sucesso");
 }).catch(err => {
     console.log(err);
 })
