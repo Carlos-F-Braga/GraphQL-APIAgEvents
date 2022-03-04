@@ -14,6 +14,36 @@ const app = express();
 
 app.use(bodyParser.json());
 
+const events = eventIds => {
+    return Event.find({_id: {$in: eventIds}})
+    .then(events => {
+        return events.map(event => {
+            return {
+                ...event._doc,
+                 _id: event.id/*event._doc._id.toString() não mais necessário*/,
+                  creator: user.bind(this, event.creator) 
+                };
+        });
+    })
+    .catch(err => {
+        throw err;
+    });
+};
+
+const user = userId => {
+    return User.findById(userId)
+    .then(user => {
+        return { 
+             ...user._doc,
+              _id: user.id/*event._doc._id.toString() não mais necessário*/,
+            createdEvents: events.bind(this, user._doc.createdEvents)
+            };
+    })
+    .catch(err=>{
+        throw err;
+    })
+}
+
 app.use('/graphql', graphqlHttp({
     schema: buildSchema(`
         type Event{
@@ -22,12 +52,14 @@ app.use('/graphql', graphqlHttp({
             description: String!
             price: Float!
             date: String!
+            creator: User!
         }
 
         type User{
             _id: ID!
             email: String!
             password: String
+            createdEvents: [Event!]
         }
 
         input EventInput{
@@ -62,8 +94,12 @@ app.use('/graphql', graphqlHttp({
             return Event.find()
             .then(events => {
                 return events.map(event => {
-                    return { ...event._doc, _id: event.id/*event._doc._id.toString() não mais necessário*/ };
-                });
+                    return { 
+                        ...event._doc,
+                         _id: event.id/*event._doc._id.toString() não mais necessário*/,
+                          creator:user.bind(this, event._doc.creator) 
+                     };
+                 });
             })
             .catch(err => {
                 console.log(err);
@@ -82,7 +118,10 @@ app.use('/graphql', graphqlHttp({
             return event
             .save()
             .then(result => {
-                createdEvent = {...result._doc, _id: result.id/*event._doc._id.toString() não mais necessário*/ };
+                createdEvent = {
+                    ...result._doc,
+                     _id: result.id/*event._doc._id.toString() não mais necessário*/,
+                    creator: user.bind(this, result._doc.creator)};
                 return User.findById('621936f0aaca5f6f6edae80e')
             })
             .then(user => {
