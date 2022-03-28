@@ -6,7 +6,7 @@ const { buildSchema, GraphQLSchema } = require('graphql');
 const mongoose = require('mongoose');
 const graphQlSchema = require('./graphql/schema/index.js');
 const graphQlResolvers = require('./graphql/resolvers/index.js');
-const isAuth = require ('./middleware/is-auth')
+const isAuth = require ('./middleware/is-auth');
 
 const app = express();
 
@@ -30,6 +30,7 @@ app.use('/graphql', graphqlHttp({
     rootValue: graphQlResolvers,
     graphiql: true
 }));
+
 
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${

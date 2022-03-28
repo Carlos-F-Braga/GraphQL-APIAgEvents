@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/Carlos-F-Braga/GraphQL-APITeste#readme",
   "dependencies": {
+    "apollo-server": "^3.6.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
