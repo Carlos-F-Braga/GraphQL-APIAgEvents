@@ -1,14 +1,22 @@
 import React, { Component } from 'react';
 import AuthContext from '../context/auth-context';
+import Popup from '../components/Popup/Popup';
+import Backdrop from '../components/Backdrop/Backdrop';
 
 import './Auth.css';
 
 class AuthPage extends Component{
     state = {
-        isLogin: true
+        isLogin: true,
+        popup: true
     };
 
-
+    PopupCancelHandler = () => {
+        this.setState({popup: false});
+      }
+    PopupOpenHandler = () => {
+        this.setState({popup: true});
+      }
 
     constructor (props) {
         super(props);
@@ -24,9 +32,7 @@ class AuthPage extends Component{
 
     static contextType = AuthContext;
 
-    switchPopup = () => { 
 
-     }
 
     submitHandler = (event) => {
         event.preventDefault();
@@ -73,7 +79,7 @@ class AuthPage extends Component{
         })
         .then(res => {
             if (res.status !== 200 && res.status !== 201){
-                this.switchPopup();
+                this.PopupOpenHandler();
                 throw new Error('Failed!');
             }
             return res.json();
@@ -94,6 +100,11 @@ class AuthPage extends Component{
 
     render() {
         return (
+        <React.Fragment>
+        {this.state.popup && <Backdrop />}
+        {this.state.popup && <Popup title="Dados Incorretos!" canPopup PopuponConfirm={this.PopupCancelHandler}>
+            <p className="bold">Seus Dados estão Incorretos!</p>
+        </Popup>}   
         <form className="auth-form" onSubmit={this.submitHandler}> 
             <div className="form-control">
                 <label htmlFor="email">E-mail</label>
@@ -108,6 +119,7 @@ class AuthPage extends Component{
                 <button type="button" onClick={this.switchModeHandler}>Switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
             </div>
         </form>
+        </React.Fragment>
         )
     }
 }

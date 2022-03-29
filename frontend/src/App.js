@@ -7,6 +7,7 @@ import EventsPage from './pages/Events';
 import MainNavigation from './components/Navigation/MainNavigation';
 // import { MainNavigation } from './components/Navigation/MainNavigation'; Pratica Certa
 
+
 import './App.css';
 import AuthContext from './context/auth-context';
 
@@ -25,6 +26,7 @@ class App extends Component {
   logout = () => {
     this.setState({token: null, userId: null});
   }
+
 
   render () {
     return (
