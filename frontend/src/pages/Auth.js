@@ -8,7 +8,7 @@ import './Auth.css';
 class AuthPage extends Component{
     state = {
         isLogin: true,
-        popup: true
+        popup: false
     };
 
     PopupCancelHandler = () => {
