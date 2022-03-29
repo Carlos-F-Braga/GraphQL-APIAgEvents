@@ -11,7 +11,7 @@ const popup = props => (
         </header>
         <section className="popup__content">{props.children}</section>
         <section className="popup__actions">
-            {props.canPopup && <button className="btn" onClick={props.PopuponConfirm}>
+            {props.canPopup && <button className="btnpop" onClick={props.PopuponConfirm}>
                 Sair
             </button>}
         </section>

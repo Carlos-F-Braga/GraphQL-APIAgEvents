@@ -29,15 +29,22 @@
     justify-content: center;
 }
 
-.btn{
-    background-color: red;
-    border-radius: 5px;
-    border-color: red;
+.btnpop{
+    background: red;
+    border-radius: 3px;
+    border: 1px solid red;
+    padding: 0.25rem 1rem;
+    margin-right: 1rem;
+    font: inherit;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    color: white;
+    cursor: pointer;
 }
 
-.btn:hover,
-.btn:active{
-    background-color: rgb(237, 1, 1);
+.btnpop:hover,
+.btnpop:active{
+    background: rgb(221, 0, 0);
+    border-color: rgb(221, 0, 0);
 }
 
 .popup__actions{
