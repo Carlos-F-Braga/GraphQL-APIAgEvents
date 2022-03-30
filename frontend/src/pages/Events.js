@@ -4,11 +4,12 @@ import Modal from '../components/Modal/Modal'
 import Backdrop from '../components/Backdrop/Backdrop';
 import './Events.css';
 import authContext from '../context/auth-context';
-
+import Popup from '../components/Popup/Popup';
 class EventsPage extends Component{
     state = {
         creating: false,
-        events: []
+        events: [],
+        popup: false
     };
 
     static contextType = authContext;
@@ -20,6 +21,13 @@ class EventsPage extends Component{
         this.dateElRef = React.createRef();
         this.descriptionElRef = React.createRef();
     }
+
+    PopupCancelHandler = () => {
+        this.setState({popup: false});
+      }
+    PopupOpenHandler = () => {
+        this.setState({popup: true});
+      }
 
     componentDidMount() {
         this.fetchEvents();
@@ -41,6 +49,7 @@ class EventsPage extends Component{
             date.trim().length === 0 ||
             description.trim().length === 0
         ){
+           this.PopupOpenHandler();
            return;
         }
 
@@ -149,6 +158,10 @@ class EventsPage extends Component{
 
         return (
         <React.Fragment>
+        {this.state.popup && <Backdrop />}
+        {this.state.popup && <Popup title="Dados Incorretos!" canPopup PopuponConfirm={this.PopupCancelHandler}>
+            <p className="bold">Seus Dados estão Incorretos!</p>
+        </Popup>}   
         {this.state.creating && <Backdrop />}
         {this.state.creating && (
         <Modal 
