@@ -180,7 +180,7 @@ class EventsPage extends Component{
         )}
         {this.context.token && (
         <div className="events-control">
-            <p>Share your own Events!</p>
+            <p className="bold">Share your own Events!</p>
             <button className="btn" onClick={this.startCreateEventHandler}>
                 Create Event
             </button>

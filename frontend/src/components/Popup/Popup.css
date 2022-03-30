@@ -1,6 +1,6 @@
 .popup{
     width: 90%;
-    height: 32%;
+    padding-bottom:  0.2rem;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
     position: fixed;
@@ -12,7 +12,7 @@
 
 .popup__header{
     padding: 1rem;
-    background: red;
+    background: linear-gradient(to right, #5101d1, red);
     color: white;
     display: flex;
     justify-content: center;
@@ -24,15 +24,17 @@
 }
 
 .popup__content{
-    padding: 1rem;
+    padding: 0.5rem;
+    padding-bottom: 1.8rem;
     display: flex;
     justify-content: center;
+    max-height: 1rem;
 }
 
 .btnpop{
-    background: red;
+    background: linear-gradient(to right, #5101d1, red);
     border-radius: 3px;
-    border: 1px solid red;
+    border: 1px solid #6219d6;
     padding: 0.25rem 1rem;
     margin-right: 1rem;
     font: inherit;
@@ -43,18 +45,20 @@
 
 .btnpop:hover,
 .btnpop:active{
-    background: rgb(221, 0, 0);
-    border-color: rgb(221, 0, 0);
+    background: linear-gradient(to right, #6219d6, rgb(247, 46, 46));
+    border-color: #6219d6;
 }
 
 .popup__actions{
     display: flex;
+    padding: 0.15rem 0;
+    padding-top: 0.4rem;
     justify-content: flex-end;
 }
 
 @media (min-width: 768px){
     .popup{
-        width: 25rem;
+        width: 21rem;
         left: calc((100% - 30rem) / 2);
     }
 }

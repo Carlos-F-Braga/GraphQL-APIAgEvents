@@ -10,7 +10,7 @@
 
 .modal__header{
     padding: 1rem;
-    background: #5101d1;
+    background: linear-gradient(to right, #5101d1, #06cffc);;
     color: white;
 }
 
