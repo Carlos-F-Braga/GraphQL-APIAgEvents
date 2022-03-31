@@ -5,13 +5,8 @@
     margin: 2rem auto;
     width: 30rem;
     max-width: 80%;
+    position: inherit;
     
 }
 
 
-.events__list-item {
-    margin: 1rem 0;
-    padding: 1rem;
-    border: 1px solid #5101d1;
-
-}
