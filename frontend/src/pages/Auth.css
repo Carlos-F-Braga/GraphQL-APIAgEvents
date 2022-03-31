@@ -8,3 +8,12 @@
 .bold{
     font-weight: bold;
 }
+.cad{
+    font-weight: bold;
+    color: white;
+}
+
+.Auth-Input{
+    border-radius: 5px;
+}
+

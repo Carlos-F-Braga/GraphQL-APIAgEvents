@@ -1,0 +1,29 @@
+.events__list-item {
+    margin: 0.7rem 0;
+    padding: 1rem;
+    border: 3px solid #5101d1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #06cffc, #5101d1);
+    border-radius: 5px;
+}
+
+.events__list-item h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #5101d1;
+
+}
+
+.events__list-item h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: wheat;
+    
+}
+
+.events__list-item p {
+    margin: 0;
+
+}
