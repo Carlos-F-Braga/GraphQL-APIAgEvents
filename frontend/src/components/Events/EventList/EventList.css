@@ -6,5 +6,12 @@
     list-style: none;
     padding: 0;
     max-height: 60vh;
-    overflow: auto;
+    background: transparent;
+    border-radius: 5px;
+    overflow-x: hidden; 
+    overflow-y: scroll;
+    overflow-block: none;
+}
+::-webkit-scrollbar {
+    display: none;
 }

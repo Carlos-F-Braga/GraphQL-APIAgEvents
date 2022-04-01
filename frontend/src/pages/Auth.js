@@ -41,6 +41,11 @@ class AuthPage extends Component{
         const email = this.emailEl.current.value;
         const password = this.passwordEl.current.value;
 
+        if (!this.state.isLogin){
+        this.switchModeHandler();
+        this.passwordEl.current.value = "";
+        this.emailEl.current.value = "";
+        }
         if (email.trim().length === 0 || password.trim().length === 0) {
             return;
         }
@@ -93,7 +98,10 @@ class AuthPage extends Component{
                     resData.data.login.userId,
                     resData.data.login.tokenExpiration
                 )
+
             }
+
+
         })
         .catch(err => {
             console.log(err)
@@ -118,7 +126,7 @@ class AuthPage extends Component{
                 <input type="password" id="password" className='Auth-Input' ref={this.passwordEl} />
             </div>
             <div className="form-actions">
-                <button type="submit">Enviar</button>
+                <button type="submit" >Enviar</button>
                 <button type="button" onClick={this.switchModeHandler}>Realizar o {this.state.isLogin ? 'Cadastro' : 'Login'}</button>
             </div>
         </form>

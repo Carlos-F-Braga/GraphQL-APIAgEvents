@@ -45,6 +45,20 @@
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
     color: white;
     cursor: pointer;
+    font-weight: bold;
+    width: 8.3rem;
+}
+.btnpopup{
+    background: linear-gradient(to right, #5101d1, red);
+    border-radius: 3px;
+    border: 1px solid #6219d6;
+    padding: 0.25rem 1rem;
+    margin-right: 1rem;
+    font: inherit;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.26);
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .btnpop:hover,

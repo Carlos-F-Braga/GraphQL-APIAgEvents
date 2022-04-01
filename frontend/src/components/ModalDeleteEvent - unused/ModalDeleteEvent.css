@@ -1,4 +1,4 @@
-.modal{
+.modaldel{
     width: 90%;
     background: white;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -6,36 +6,31 @@
     top: 20vh;
     left: 5%;
     z-index: 100;
-    border-radius: 5px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
-.modal__header{
+.modaldel__header{
     padding: 1rem;
     background: linear-gradient(to right, #5101d1, #06cffc);;
     color: white;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 }
 
-.modal__header h1{
+.modaldel__header h1{
     margin: 0;
     font-size: 1.25rem;
 }
 
-.modal__content{
+.modaldel__content{
     padding: 1rem;
 }
 
-.modal__actions{
+.modaldel__actions{
     display: flex;
     justify-content: flex-end;
     padding: 1rem;
 }
 
 @media (min-width: 768px){
-    .modal{
+    .modaldel{
         width: 30rem;
         left: calc((100% - 30rem) / 2);
     }

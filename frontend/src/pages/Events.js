@@ -44,6 +44,50 @@ class EventsPage extends Component{
     startCreateEventHandler = () => {
         this.setState({creating: true});
     };
+    
+
+
+    deleteEventHandler = eventId => {
+        
+        this.setState({isLoading: true});
+        const requestBody = {
+            query: `
+              mutation {
+                  cancelEvent(eventId: "${eventId}") {
+                    _id
+                  }
+              }
+            `
+        };
+    
+
+    fetch('http://localhost:8000/graphql', {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + this.context.token
+        }
+    })
+    .then(res => {
+        if (res.status !== 200 && res.status !== 201){
+            throw new Error('Failed!');
+        }
+        return res.json();
+    })
+    .then (resData => {
+        this.setState(prevState => {
+            const updatedEvents = prevState.events.filter(event => {
+                return event._id !== eventId;
+            });
+            return { events: updatedEvents, isLoading: false };
+        });
+    })
+    .catch(err => {
+        console.log(err);
+        this.setState({isLoading: false});
+    });
+    };
 
     modalConfirmHandler = () => {
         this.setState({creating: false});
@@ -230,28 +274,29 @@ class EventsPage extends Component{
         {(this.state.creating || this.state.selectedEvent) && <Backdrop />}
         {this.state.creating && (
         <Modal 
-        title="Add Event" 
+        title="Criar Evento" 
         canCancel 
         canConfirm 
         onCancel={this.modalCancelHandler} 
         onConfirm={this.modalConfirmHandler}
+        onDelete={this.deleteEventHandler}
         confirmText='Confirmar'
         >
              <form>
               <div className="form-control">
-                <label htmlFor="title">Title</label>
+                <label htmlFor="title">Título</label>
                 <input type="text" id="title" ref={this.titleElRef}></input>
               </div>
               <div className="form-control">
-                <label htmlFor="price">Price</label>
+                <label htmlFor="price">Preço</label>
                 <input type="number" id="price" ref={this.priceElRef}></input>
               </div>
               <div className="form-control">
-                <label htmlFor="date">Date</label>
+                <label htmlFor="date">Data</label>
                 <input type="datetime-local" id="date" ref={this.dateElRef}></input>
               </div>
               <div className="form-control">
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description">Descrição</label>
                 <textarea id="description" rows="4" ref={this.descriptionElRef}></textarea>
               </div> 
              </form>
@@ -286,6 +331,7 @@ class EventsPage extends Component{
          events={this.state.events}
          authUserId={this.context.userId}
          onViewDetail={this.showDetailHandler}
+         onViewDelete={this.deleteEventHandler}
          />
          )}
         </React.Fragment>

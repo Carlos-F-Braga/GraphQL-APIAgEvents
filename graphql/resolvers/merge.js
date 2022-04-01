@@ -41,11 +41,23 @@ const events = async eventIds => {
  };
 
  const transformEvent = event => {
+    
     return {
+       
         ...event._doc,
         _id: event.id/*event._doc._id.toString() não mais necessário*/,
         date: dateToString(event._doc.date),
        creator: user.bind(this, event.creator) 
+    };
+    
+};
+
+const deleteEvent = deleted => {
+    console.log(deleted);
+    return {
+        ...deleted._doc,
+        _id: deleted.id/*event._doc._id.toString() não mais necessário*/,
+       creator: user.bind(this, deleted.creator) 
     };
 };
 
@@ -67,3 +79,4 @@ const transformBooking = booking => {
 
  exports.transformEvent = transformEvent;
  exports.transformBooking = transformBooking;
+ exports.DeleteEvent = deleteEvent;

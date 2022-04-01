@@ -10,9 +10,11 @@ const eventItem = props => (
         </div>
         <div>
             {props.userId === props.creatorId ? ( 
-            <p className="cad">Voce é o Criador deste Evento!</p> 
+            <div className="bookings__item-actions">
+            <button className="btnpop" onClick={props.onDelete.bind(this, props.eventId)}>Cancelar</button>
+            </div>
             ) : ( 
-            <button className="btn" onClick={props.onDetail.bind(this, props.eventId)}>Ver Detalhes</button>
+            <button className="evbtn" onClick={props.onDetail.bind(this, props.eventId)}>Ver Detalhes</button>
             )}
         </div>
     </li>

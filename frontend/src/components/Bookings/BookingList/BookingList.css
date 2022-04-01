@@ -1,34 +1,31 @@
-.events__list-item {
-    margin: 0.7rem 0;
-    padding: 1rem;
-    border: 3px solid #5101d1;
+.bookings__list{
+    list-style: none;
+    margin: 2rem auto;
+    padding: 0;
+    max-height: 70vh;
+    overflow-x: hidden; 
+    overflow-y: scroll;
+    width: 40rem;
+    max-width: 90%;
+    background: transparent;
+}
+
+.bookings__item{
+    margin: 1rem 0;
+    padding: 0.5rem;
     display: flex;
     justify-content: space-between;
+    border: 3px solid #5101d1;
     align-items: center;
+    font-weight: bold;
+    color: white;
+    overflow: auto;
+    max-height: 70vh;
     background: linear-gradient(to right, #06cffc, #5101d1);
     border-radius: 5px;
 }
 
-.events__list-item h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: #5101d1;
-
-}
-
-
-.events__list-item h2 {
-    margin: 0;
-    font-size: 1rem;
-    color: wheat;
-    
-}
-
-.events__list-item p {
-    margin: 0;
-
-}
-.evbtn{
+.bookbtn{
     background: linear-gradient(to right, #5101d1, #06cffc);
     font: inherit;
     border: 1px solid #5101d1;
