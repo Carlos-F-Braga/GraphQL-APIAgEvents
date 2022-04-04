@@ -318,9 +318,9 @@ class EventsPage extends Component{
         </Modal>}
         {this.context.token && (
         <div className="events-control">
-            <p className="cad">Share your own Events!</p>
+            <p className="cad">Compartilhe seus Próprios Eventos!</p>
             <button className="btn" onClick={this.startCreateEventHandler}>
-                Create Event
+                Criar Evento
             </button>
         </div>
         )}

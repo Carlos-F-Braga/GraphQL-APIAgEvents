@@ -47,6 +47,7 @@ class AuthPage extends Component{
         this.emailEl.current.value = "";
         }
         if (email.trim().length === 0 || password.trim().length === 0) {
+            this.PopupOpenHandler();
             return;
         }
 
@@ -89,20 +90,28 @@ class AuthPage extends Component{
                 this.PopupOpenHandler();
                 throw new Error('Failed!');
             }
+
             return res.json();
+
         })
         .then (resData => {
+            if (this.state.isLogin ){
+                if (resData.data.createUser == null) {
+                this.PopupOpenHandler();
+                throw new Error('Failed!');
+                }
+            }
             if (resData.data.login.token) {
                 this.context.login(
                     resData.data.login.token,
                     resData.data.login.userId,
                     resData.data.login.tokenExpiration
                 )
+            }
 
             }
 
-
-        })
+        )
         .catch(err => {
             console.log(err)
         });
