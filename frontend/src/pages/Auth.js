@@ -41,11 +41,6 @@ class AuthPage extends Component{
         const email = this.emailEl.current.value;
         const password = this.passwordEl.current.value;
 
-        if (!this.state.isLogin){
-        this.switchModeHandler();
-        this.passwordEl.current.value = "";
-        this.emailEl.current.value = "";
-        }
         if (email.trim().length === 0 || password.trim().length === 0) {
             this.PopupOpenHandler();
             return;
@@ -95,11 +90,17 @@ class AuthPage extends Component{
 
         })
         .then (resData => {
-            if (this.state.isLogin ){
+            if (!this.state.isLogin ){
+                
+                this.switchModeHandler();
+                this.passwordEl.current.value = "";
+                this.emailEl.current.value = "";
+
                 if (resData.data.createUser == null) {
                 this.PopupOpenHandler();
                 throw new Error('Failed!');
                 }
+
             }
             if (resData.data.login.token) {
                 this.context.login(
