@@ -1,4 +1,5 @@
 const Event = require('../../models/event');
+const Booking = require('../../models/booking');
 const { transformEvent, DeleteEvent } = require('./merge');
 const User = require('../../models/user');
 
@@ -56,9 +57,11 @@ module.exports = {
         try{
             const event = await Event.findById(args.eventId).populate('creator');
             const user = DeleteEvent(event.creator);
-                console.log(user);
+            console.log(user);
             await Event.deleteOne({_id: args.eventId});
+            await Booking.deleteMany({event: args.eventId});
             return user;
+
         }
         catch (err){
             throw err;
