@@ -57,6 +57,7 @@ type RootMutation{
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
     cancelEvent(eventId: ID!): User!
+    killUser(userId: ID!): User
 }
 
 schema {

@@ -1,6 +1,6 @@
 const Event = require('../../models/event');
 const Booking = require('../../models/booking');
-const { transformEvent, DeleteEvent } = require('./merge');
+const { transformEvent, DeleteEvent, KillUser } = require('./merge');
 const User = require('../../models/user');
 
 
@@ -66,6 +66,24 @@ module.exports = {
         catch (err){
             throw err;
         }
+    },
+    killUser: async (args, req) => {   
+    if (!req.isAuth){
+            throw new Error('Unauthenticated!');
+        }
+        try{
+            const user = KillUser(args.userId); 
+            console.log(args); 
+            await User.deleteOne({_id: args.userId})
+            await Event.deleteMany({creator: args.userId}); 
+            await Booking.deleteMany({user: args.userId});
+            return user;
+
+        }
+        catch (err){
+            throw err;
+        }
     }
+    
 
 };

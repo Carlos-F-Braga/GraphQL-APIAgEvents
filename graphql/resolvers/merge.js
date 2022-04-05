@@ -63,6 +63,14 @@ const deleteEvent = deleted => {
     };
 };
 
+const killUser = killed => {
+    console.log(killed);
+    return {
+        ...killed._doc,
+        _id: killed.id/*event._doc._id.toString() não mais necessário*/
+    };
+};
+
 
 const transformBooking = booking => {
     return{
@@ -82,3 +90,4 @@ const transformBooking = booking => {
  exports.transformEvent = transformEvent;
  exports.transformBooking = transformBooking;
  exports.DeleteEvent = deleteEvent;
+ exports.KillUser = killUser;
