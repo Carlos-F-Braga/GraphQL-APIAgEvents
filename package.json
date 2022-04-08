@@ -21,11 +21,13 @@
     "apollo-server": "^3.6.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
+    "chart.js": "^1.1.1",
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
     "graphql": "^15.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.3"
+    "mongoose": "^6.2.3",
+    "react-chartjs": "^1.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
