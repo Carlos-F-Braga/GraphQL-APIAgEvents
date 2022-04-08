@@ -1,0 +1,11 @@
+
+.bar{
+    border-radius: 5px;
+    background-color:bisque;
+
+
+}
+.bar:hover,
+.bar:active{
+    background-color:wheat;
+}

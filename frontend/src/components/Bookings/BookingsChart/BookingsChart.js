@@ -36,19 +36,20 @@ const bookingsChart = props => {
             }
          }, 0);
          values.push(filteredBookingsCount);
+         console.log(bucket);
          chartData.labels.push(bucket);
          chartData.datasets.push({
                 //label: "My First Dataset",
-                fillColor: 'rgba(220,220,220,0.5)',
-                strokeColor: 'rgba(220,220,220,0.8)',
-                highlightFill: 'rgba(220,220,220,0.75)',
-                highlightStroke: 'rgba(220,220,220,1)',
+                fillColor: 'rgba(6, 207, 252, 0.5)',
+                strokeColor: 'rgba(81, 1, 209, 0.5)',
+                highlightFill: 'rgba(6, 207, 252, 1)',
+                highlightStroke: 'rgba(81, 1, 209, 1)',
                 data: values
          });
          values = [...values]
          values[values.length - 1] = null
      }
-    return <div><BarChart data={chartData} /></div>;
+    return <BarChart className="bar" data={chartData} />;
 };
 
 export default bookingsChart;
