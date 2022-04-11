@@ -2,10 +2,15 @@
 .bar{
     border-radius: 5px;
     background-color:bisque;
-
+    height:280;
+    width:575;
+    max-height:95vh;
+    max-width:95vw;
+    
 
 }
 .bar:hover,
 .bar:active{
     background-color:wheat;
 }
+

@@ -1,6 +1,11 @@
 .bookings-control {
     text-align: center;
     padding: 0.5rem;
+    position: absolute;
+    top: 8.5vh;
+    left: 82vh;
+    max-width: 80vw;
+    max-height: 80vh;
 }
 
 .bookings-control button {
@@ -12,7 +17,8 @@
     border-bottom: 0.3rem solid transparent;
     cursor: pointer;
     font-weight: bold;
-}
+
+}   
 
 .bookings-control button.active{
     /**border-bottom-color: ;*/

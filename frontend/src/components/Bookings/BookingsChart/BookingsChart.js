@@ -24,6 +24,7 @@ const BOOKINGS_BUCKETS = {
 
 const bookingsChart = props => {
      const chartData = {labels: [], datasets: []};
+
      let values = [];
      for (const bucket in BOOKINGS_BUCKETS){
          const filteredBookingsCount = props.bookings.reduce((prev, current) => {
@@ -36,20 +37,23 @@ const bookingsChart = props => {
             }
          }, 0);
          values.push(filteredBookingsCount);
-         console.log(bucket);
-         chartData.labels.push(bucket);
+         let bv = "";
+         bv = bucket;
+         console.log(bv);
+         chartData.labels.push(bv);
          chartData.datasets.push({
                 //label: "My First Dataset",
-                fillColor: 'rgba(6, 207, 252, 0.5)',
-                strokeColor: 'rgba(81, 1, 209, 0.5)',
+                fillColor: 'rgba(6, 207, 252, 0.75)',
+                strokeColor: 'rgba(81, 1, 209, 0.75)',
                 highlightFill: 'rgba(6, 207, 252, 1)',
                 highlightStroke: 'rgba(81, 1, 209, 1)',
-                data: values
+                data: values  
          });
+
          values = [...values]
          values[values.length - 1] = null
      }
-    return <BarChart className="bar" data={chartData} />;
+    return <BarChart className="bar" data={chartData} width={575} height={280} />;
 };
 
 export default bookingsChart;
