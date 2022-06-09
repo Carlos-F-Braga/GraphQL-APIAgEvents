@@ -27,7 +27,8 @@
     "graphql": "^15.8.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.3",
-    "react-chartjs": "^1.2.0"
+    "react-chartjs": "^1.2.0",
+    "styled-components": "^5.3.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
