@@ -31,7 +31,10 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-
+const caco = {
+    caralho: 'prince de merda',
+    sohave: 'miseria'
+}
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
     process.env.MONGO_PASSWORD
@@ -39,6 +42,7 @@ mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
 ).then(() => {
     app.listen(8000);
     console.log("Funcionando Corretamente - Conexão Estabelecida com Sucesso");
+    console.table(caco)
 }).catch(err => {
     console.log(err);
 })
