@@ -6,7 +6,7 @@ const { buildSchema, GraphQLSchema } = require('graphql');
 const mongoose = require('mongoose');
 const graphQlSchema = require('./graphql/schema/index.js');
 const graphQlResolvers = require('./graphql/resolvers/index.js');
-const isAuth = require ('./middleware/is-auth');
+const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
@@ -31,20 +31,47 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-const caco = {
-    caralho: 'prince de merda',
-    sohave: 'miseria'
+const host = '127.0.0.1' || process.env.host
+
+const port = 8000 || process.env.port
+
+const configApi = {
+    port: {
+        config: port
+    },
+    host: {
+        config: host
+    },
+    user: {
+        config: process.env.MONGO_USER
+    },
+    database: {
+        config: process.env.MONGO_DB
+    },
+    running_command: {
+        config: 'npm ' + process.env.npm_lifecycle_event
+    },
+    running_script: {
+        config: process.env.npm_lifecycle_script
+    },
+    IDE: {
+        config: process.env.TERM_PROGRAM
+    }
 }
+
+const success = "Funcionando Corretamente - Conexão Estabelecida com Sucesso"
+
+const error = "Algo deu Errado: "
 
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
     process.env.MONGO_PASSWORD
 }@cluster0.38xfe.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
 ).then(() => {
-    app.listen(8000);
-    console.log("Funcionando Corretamente - Conexão Estabelecida com Sucesso");
-    console.table(caco)
+    app.listen(port);
+    console.log(success);
+    console.table(configApi)
 }).catch(err => {
-    console.log(err);
+    console.log(error, err);
 })
 
 
