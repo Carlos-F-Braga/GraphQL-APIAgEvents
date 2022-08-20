@@ -19,6 +19,14 @@ const eventSchema = new Schema({
         type: Date,
         required: true
     },
+    category: {
+        type: Number,
+        required: true
+    },
+    priority: {
+        type: Number,
+        required: true
+    },
     creator: {
         type: Schema.Types.ObjectId,
         ref: 'User'

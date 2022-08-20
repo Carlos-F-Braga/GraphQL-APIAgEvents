@@ -11,6 +11,14 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    location: {
+        type: String,
+        required: true
+    },
+    job:{
+        type: String,
+        required: true
+    },
     createdEvents:[
         {
             type: Schema.Types.ObjectId,

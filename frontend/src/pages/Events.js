@@ -154,6 +154,8 @@ class EventsPage extends Component{
                     description: resData.data.createEvent.description,
                     date: resData.data.createEvent.date,
                     price: resData.data.createEvent.price,
+                    category: 1,
+                    priority: 1,
                     creator: {
                       _id: this.context.userId
                     }

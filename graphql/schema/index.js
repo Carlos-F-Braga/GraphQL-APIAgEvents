@@ -15,13 +15,18 @@ type Event{
     description: String!
     price: Float!
     date: String!
+    category: Int!
+    priority: Int!
     creator: User!
+
 }
 
 type User{
     _id: ID!
     email: String!
     password: String
+    location: String
+    job: String
     createdEvents: [Event!]
 }
 
