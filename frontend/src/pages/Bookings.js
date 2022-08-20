@@ -7,6 +7,7 @@ import BookingList from '../components/Bookings/BookingList/BookingList';
 import BookingsChart from '../components/Bookings/BookingsChart/BookingsChart';
 import BookingsControl from '../components/Bookings/BookingsControl/BookingsControl';
 import './Bookings.css';
+import { ApiContext } from '../context/api-context';
 
 class BookingsPage extends Component{
     state= {
@@ -14,7 +15,7 @@ class BookingsPage extends Component{
         bookings: [],
         outputType: 'list'
     };
-
+    
     static contextType = AuthContext;
 
     componentDidMount() {
@@ -23,6 +24,7 @@ class BookingsPage extends Component{
 
     fetchBookings = () => {
         this.setState({isLoading: true});
+        const api = ApiContext._currentValue;
         const requestBody = {
             query: `
               query {
@@ -41,7 +43,7 @@ class BookingsPage extends Component{
         };
     
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(api, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -67,6 +69,7 @@ class BookingsPage extends Component{
 
     deleteBookingHandler = bookingId => {
         this.setState({isLoading: true});
+        const api = ApiContext._currentValue;
         const requestBody = {
             query: `
               mutation CancelBooking($id: ID!) {
@@ -82,7 +85,7 @@ class BookingsPage extends Component{
         };
     
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(api, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {

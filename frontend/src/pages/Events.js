@@ -8,6 +8,7 @@ import Spinner from '../components/Spinner/Spinner';
 import Popup from '../components/Popup/Popup';
 import EventList from '../components/Events/EventList/EventList';
 import Background from '../components/Background/Background';
+import { ApiContext } from '../context/api-context';
 
 class EventsPage extends Component{
     state = {
@@ -48,8 +49,8 @@ class EventsPage extends Component{
 
 
     deleteEventHandler = eventId => {
-        
         this.setState({isLoading: true});
+        const api = ApiContext._currentValue;
         const requestBody = {
             query: `
               mutation {
@@ -61,7 +62,7 @@ class EventsPage extends Component{
         };
     
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(api, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -91,6 +92,7 @@ class EventsPage extends Component{
 
     modalConfirmHandler = () => {
         this.setState({creating: false});
+        const api = ApiContext._currentValue;
         const title = this.titleElRef.current.value;
         const price = +this.priceElRef.current.value;
         const date = this.dateElRef.current.value;
@@ -107,7 +109,7 @@ class EventsPage extends Component{
 
         const event = {title, price, date, description};
         console.log(event);
-
+        
         const requestBody = {
                 query: `
                   mutation CreateEvent($title: String!, $desc: String!, $price: Float!, $date: String!) {
@@ -131,7 +133,7 @@ class EventsPage extends Component{
             const token = this.context.token;
 
 
-        fetch('http://localhost:8000/graphql', {
+        fetch(api, {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
@@ -174,6 +176,7 @@ class EventsPage extends Component{
 
     fetchEvents() {
         this.setState({isLoading: true})
+        const api = ApiContext._currentValue;
         const requestBody = {
             query: `
               query {
@@ -194,7 +197,7 @@ class EventsPage extends Component{
     
 
 
-    fetch('http://localhost:8000/graphql', {
+    fetch(api, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -233,6 +236,7 @@ class EventsPage extends Component{
             this.setState({selectedEvent: null});
             return;
         }
+        const api = ApiContext._currentValue;
         const requestBody = {
             query: `
               mutation BookEvent($id: ID!){
@@ -247,7 +251,7 @@ class EventsPage extends Component{
                 id: this.state.selectedEvent._id
             }
         };
-    fetch('http://localhost:8000/graphql', {
+    fetch(api, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {

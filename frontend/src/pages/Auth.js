@@ -3,6 +3,7 @@ import AuthContext from '../context/auth-context';
 import Popup from '../components/Popup/Popup';
 import Backdrop from '../components/Backdrop/Backdrop';
 import Background from '../components/Background/Background';
+import { ApiContext } from '../context/api-context';
 
 import './Auth.css';
 
@@ -40,6 +41,7 @@ class AuthPage extends Component{
         event.preventDefault();
         const email = this.emailEl.current.value;
         const password = this.passwordEl.current.value;
+        const api = ApiContext._currentValue;
 
         if (email.trim().length === 0 || password.trim().length === 0) {
             this.PopupOpenHandler();
@@ -81,7 +83,7 @@ class AuthPage extends Component{
 
 
 
-        fetch('http://localhost:8000/graphql', {
+        fetch(api, {
             method: 'POST',
             body: JSON.stringify(requestBody),
             headers: {
