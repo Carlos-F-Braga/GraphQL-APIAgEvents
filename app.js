@@ -31,16 +31,16 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-const host = '127.0.0.1' || process.env.host
+const host = process.env.host || '127.0.0.1' 
 
-const port = 8000 || process.env.port
+const port = process.env.port || '8000'
 
 const configApi = {
     port: {
-        config: port
+        config: port.trim()
     },
     host: {
-        config: host
+        config: host.trim()
     },
     user: {
         config: process.env.MONGO_USER
