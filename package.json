@@ -10,7 +10,7 @@
     "start-api": "npm start",
     "start-dev": "set PORT=8000 && set HOST=127.0.0.1 && nodemon app.js",
     "start-servers": "concurrently \"npm run start-app\" \"npm run start-api\"",
-    "start-dev-servers": "concurrently \"cd ./frontend && npm run start-dev\" \"npm run start-dev\""
+    "start-servers-dev": "concurrently \"cd ./frontend && npm run start-dev\" \"npm run start-dev\""
   },
   "repository": {
     "type": "git",

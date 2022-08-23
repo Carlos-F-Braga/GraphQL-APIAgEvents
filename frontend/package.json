@@ -19,7 +19,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-app": "npm start",
+    "start-api": "cd ../ && npm start",
     "start-dev": "set PORT=3000 && react-scripts start",
+    "start-servers": "concurrently \"npm run start-api\" \"npm run start-app\"",
+    "start-servers-dev": "concurrently \"cd ../ && npm run start-dev\" \"npm run start-dev\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
