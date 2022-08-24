@@ -1,17 +1,18 @@
 import { StyledCard } from "./styles/Card.styled"
 
 
-export default function Card ({item: {id, name, description, language, avatar} }) {
+export default function Card ({item: {id, name, title, price, image} }) {
+    console.log(image)
     return (
         <StyledCard layout={id % 2 === 0 &&  'row-reverse'}>
             <div> 
-                <h2>{name}</h2>
-                <p>{description}</p>
-                <h4>{language}</h4>
+                <h2>{title}</h2>
+                <p>{name}</p>
+                <h4>{price}</h4>
             </div>
 
             <div> 
-                <img src={`${avatar}`} alt="" />
+                <img src={`./images/${image}`} alt="" />
             </div>
         </StyledCard>
     )
