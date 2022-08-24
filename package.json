@@ -4,13 +4,15 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "setup": "concurrently \"cd ./frontend && npm i\" \"cd ./page && npm i\" \"npm i\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "start-app": "cd ./frontend && npm start",
     "start-api": "npm start",
+    "start-page": "cd ./page && npm start",
     "start-dev": "set PORT=8000 && set HOST=127.0.0.1 && nodemon app.js",
-    "start-servers": "concurrently \"npm run start-app\" \"npm run start-api\"",
-    "start-servers-dev": "concurrently \"cd ./frontend && npm run start-dev\" \"npm run start-dev\""
+    "start-servers": "concurrently \"npm run start-app\" \"npm run start-api\" \"npm run start-page\"",
+    "start-servers-dev": "concurrently \"cd ./frontend && npm run start-dev\" \"npm run start-dev\" \"npm run start-page\""
   },
   "repository": {
     "type": "git",
