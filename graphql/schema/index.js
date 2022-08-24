@@ -15,8 +15,8 @@ type Event{
     description: String!
     price: Float!
     date: String!
-    category: Int!
-    priority: Int!
+    category: Int
+    priority: Int
     creator: User!
 
 }
