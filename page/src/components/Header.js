@@ -28,8 +28,8 @@ export default function Header () {
             
             <Container>
             <Nav> 
-                <Logo src='./images/logo.png' alt='' />
-                <Button>Se Cadastre</Button>
+            <a href="http://localhost:3000/events" target="_blank" rel="noreferrer"> <Logo src='./images/logo.png' alt='' /> </a>
+            <a href="http://localhost:3000/auth" target="_blank" rel="noreferrer">   <Button>Se Cadastre</Button> </a>
             </Nav>
             <Flex>
                 <div >

@@ -11,7 +11,7 @@ const mainNavigation = props => (
             return (    
             <header className="main-navigation">
             <div className="main-navigation__logo">
-            <h1 onClick={context.logout}>AgEvent - The Advance of Events</h1>
+            <a href="http://localhost:5000/" target="_blank" rel="noreferrer"> <h1 onClick={context.logout}>AgEvent - The Advance of Events</h1> </a>
             </div>
             <nav className="main-navigation__items">
                 <ul>
