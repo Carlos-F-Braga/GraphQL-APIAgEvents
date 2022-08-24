@@ -13,7 +13,7 @@ import { useInput } from "./Context";
 export default function Header () {
     const { setInput } = useInput()
 
-    const [text, setText] = useState('node')
+    const [text, setText] = useState('')
   
     const textHandler = (text) => {
         console.log(text)

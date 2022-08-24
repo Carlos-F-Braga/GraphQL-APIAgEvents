@@ -3,7 +3,7 @@ import React, { useState } from "react"
 export const InputContext = React.createContext({});
 
 export const InputProvider = (props) => {
-    const [input, setInput] = useState('node')
+    const [input, setInput] = useState('')
 
 
 return (
