@@ -32,7 +32,7 @@ app.use('/graphql', graphqlHttp({
 
 const host = process.env.HOST || '127.0.0.1' 
 
-const port = process.env.PORT || '8000'
+const port = process.env.PORT || '443'
 
 const configApi = {
     port: {
@@ -62,7 +62,7 @@ const success = "Funcionando Corretamente - Conexão Estabelecida com Sucesso"
 
 const error = "Algo deu Errado: "
 
-mongoose.connect(process.env.MONGO_CONNECTION_STRING)
+mongoose.connect("mongodb+srv://user-agevents:96hGaBvstrk3Yv0g@cluster-agevents.lufiwuu.mongodb.net/?retryWrites=true&w=majority")
 .then(() => {
     app.listen(port);
     console.log(success);
