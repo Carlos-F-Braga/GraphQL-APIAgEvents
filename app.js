@@ -32,7 +32,7 @@ app.use('/graphql', graphqlHttp({
 
 const host = process.env.HOST || '127.0.0.1' 
 
-const port = process.env.PORT || '8000'
+const port = process.env.PORT || '443'
 
 const configApi = {
     port: {
