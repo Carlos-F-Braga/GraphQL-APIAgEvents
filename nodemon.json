@@ -2,6 +2,7 @@
     "env": {
         "MONGO_USER": "maximilian",
         "MONGO_PASSWORD": "graphqlapi",
-        "MONGO_DB": "events-react-dev"
+        "MONGO_DB": "events-react-dev",
+        "MONGO_CONNECTION_STRING": ""
     }
 }
