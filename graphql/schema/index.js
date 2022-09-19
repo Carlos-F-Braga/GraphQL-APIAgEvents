@@ -34,7 +34,10 @@ type AuthData {
     userId: ID!
     token: String!
     tokenExpiration: Int!
+}
 
+type ChangeUserPasswordResponse {
+    isChanged: Boolean!
 }
 
 input EventInput{
@@ -51,21 +54,22 @@ input UserInput {
     password: String
 }
 
-
 type RootQuery {
     events: [Event!]!
     bookings: [Booking!]!
-    login(email: String!, password: String!): AuthData!
+    login(email: String!, password: String!): AuthData
     getUserById(userId: ID!): User
+    getUserByPhone(phone: String!): User
 }
 
-type RootMutation{
+type RootMutation {
     createEvent(eventInput: EventInput): Event
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
     cancelEvent(eventId: ID!): User!
     killUser(userId: ID!): User
+    changeUserPassword(userId: ID!, password: String!): ChangeUserPasswordResponse
 }
 
 schema {

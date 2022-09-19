@@ -3,6 +3,6 @@
         "MONGO_USER": "maximilian",
         "MONGO_PASSWORD": "graphqlapi",
         "MONGO_DB": "events-react-dev",
-        "MONGO_CONNECTION_STRING": ""
+        "MONGO_CONNECTION_STRING": "mongodb+srv://user-agevents:96hGaBvstrk3Yv0g@cluster-agevents.lufiwuu.mongodb.net/?retryWrites=true&w=majority"
     }
 }
