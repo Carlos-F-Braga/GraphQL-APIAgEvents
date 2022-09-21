@@ -9,7 +9,7 @@ type Booking{
    updatedAt: String! 
 }
 
-type Event{
+type Event {
     _id: ID!
     title: String!
     description: String!
@@ -18,10 +18,9 @@ type Event{
     category: Int
     priority: Int
     creator: User!
-
 }
 
-type User{
+type User {
     _id: ID!
     name: String!
     phone: String!
@@ -40,11 +39,19 @@ type ChangeUserPasswordResponse {
     isChanged: Boolean!
 }
 
-input EventInput{
+input EventInput {
     title: String!
     description: String!
     price: Float!
     date: String!
+}
+
+input EventInputMobile {
+    title: String!
+    description: String!
+    date: String!
+    category: Int
+    priority: Int
 }
 
 input UserInput {
@@ -55,15 +62,17 @@ input UserInput {
 }
 
 type RootQuery {
-    events: [Event!]!
+    events: [Event!]
     bookings: [Booking!]!
     login(email: String!, password: String!): AuthData
     getUserById(userId: ID!): User
     getUserByPhone(phone: String!): User
+    getEventsFromUser(userId: ID!): [Event!]
 }
 
 type RootMutation {
     createEvent(eventInput: EventInput): Event
+    createEventMobile(eventInputMobile: EventInputMobile, userId: ID!): Event
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
