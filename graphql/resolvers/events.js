@@ -90,6 +90,7 @@ module.exports = {
             description: eventInputMobile.description,
             price: 0.00,
             date: new Date(eventInputMobile.date),
+            status: eventInputMobile.status,
             category: eventInputMobile.category,
             priority: eventInputMobile.priority,
             creator: userId
@@ -126,6 +127,47 @@ module.exports = {
                     $in: user.createdEvents,
                 }
             });
+
+            return eventsFromUser.map(event => transformEvent(event));
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    searchEventsFromUser: async ({ userId, searchEventsMobile }) => {
+        try {
+            const user = await User.findOne({ _id: ObjectId(userId) });
+            if (!user) {
+                throw new Error('O Usuário não Existe.');
+            }
+
+            var params = {
+                '_id': {
+                    $in: user.createdEvents,
+                }
+            };
+
+            if (searchEventsMobile.title) {
+                params['title'] = { $regex: '.*' + searchEventsMobile.title + '.*', $options:'i' };
+            }
+
+            if (searchEventsMobile.initialDate) {
+                params['date'] = { $gte: new Date(searchEventsMobile.initialDate) };
+            }
+            
+            if (searchEventsMobile.finalDate) {
+                params['date'] = {...params['date'], $lt: new Date(searchEventsMobile.finalDate) };
+            }
+
+            if (searchEventsMobile.category) {
+                params['category'] = searchEventsMobile.category;
+            }
+
+            if (searchEventsMobile.priority) {
+                params['priority'] = searchEventsMobile.priority;
+            }
+
+            var eventsFromUser = await Event.find(params);
 
             return eventsFromUser.map(event => transformEvent(event));
         } catch (error) {

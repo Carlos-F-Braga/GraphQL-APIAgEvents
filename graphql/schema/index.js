@@ -15,6 +15,7 @@ type Event {
     description: String!
     price: Float!
     date: String!
+    status: Int
     category: Int
     priority: Int
     creator: User!
@@ -50,6 +51,7 @@ input EventInputMobile {
     title: String!
     description: String!
     date: String!
+    status: Int
     category: Int
     priority: Int
 }
@@ -61,6 +63,14 @@ input UserInput {
     password: String
 }
 
+input SearchEventsMobile {
+    title: String
+    finalDate: String
+    initialDate: String
+    category: Int
+    priority: Int
+}
+
 type RootQuery {
     events: [Event!]
     bookings: [Booking!]!
@@ -68,11 +78,12 @@ type RootQuery {
     getUserById(userId: ID!): User
     getUserByPhone(phone: String!): User
     getEventsFromUser(userId: ID!): [Event!]
+    searchEventsFromUser(userId: ID!, searchEventsMobile: SearchEventsMobile!): [Event!]
 }
 
 type RootMutation {
     createEvent(eventInput: EventInput): Event
-    createEventMobile(eventInputMobile: EventInputMobile, userId: ID!): Event
+    createEventMobile(eventInputMobile: EventInputMobile!, userId: ID!): Event
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
