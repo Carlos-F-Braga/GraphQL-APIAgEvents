@@ -175,4 +175,36 @@ module.exports = {
             throw error;
         }
     },
+    changeStatusEvent: async ({ eventId, status }) => {
+        try {
+            const event = await Event.findOne({ _id: ObjectId(eventId) });
+            if (!event) {
+                throw new Error('Evento não existe.');
+            }
+            
+            event.status = status;
+    
+            await event.save();
+            
+            return { isChanged: true };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    removeEvent: async ({ eventId }) => {
+        try {
+            const event = await Event.findOne({ _id: ObjectId(eventId) });
+            if (!event) {
+                throw new Error('Evento não existe.');
+            }
+            
+            await event.remove();
+            
+            return { isRemoved: true };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
 };

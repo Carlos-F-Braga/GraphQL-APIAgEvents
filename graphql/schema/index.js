@@ -36,8 +36,12 @@ type AuthData {
     tokenExpiration: Int!
 }
 
-type ChangeUserPasswordResponse {
+type ChangeDataResponse {
     isChanged: Boolean!
+}
+
+type RemoveDataResponse {
+    isRemoved: Boolean!
 }
 
 input EventInput {
@@ -89,7 +93,9 @@ type RootMutation {
     cancelBooking(bookingId: ID!): Event!
     cancelEvent(eventId: ID!): User!
     killUser(userId: ID!): User
-    changeUserPassword(userId: ID!, password: String!): ChangeUserPasswordResponse
+    changeUserPassword(userId: ID!, password: String!): ChangeDataResponse
+    changeStatusEvent(eventId: ID!, status: Int!): ChangeDataResponse
+    removeEvent(eventId: ID!): RemoveDataResponse
 }
 
 schema {
