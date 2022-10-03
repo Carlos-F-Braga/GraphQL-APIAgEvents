@@ -159,14 +159,6 @@ module.exports = {
                 params['date'] = {...params['date'], $lt: new Date(searchEventsMobile.finalDate) };
             }
 
-            if (searchEventsMobile.category) {
-                params['category'] = searchEventsMobile.category;
-            }
-
-            if (searchEventsMobile.priority) {
-                params['priority'] = searchEventsMobile.priority;
-            }
-
             var eventsFromUser = await Event.find(params);
 
             return eventsFromUser.map(event => transformEvent(event));
@@ -181,7 +173,7 @@ module.exports = {
             if (!event) {
                 throw new Error('Evento não existe.');
             }
-            
+
             event.status = status;
     
             await event.save();
