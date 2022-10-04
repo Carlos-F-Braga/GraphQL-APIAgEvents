@@ -41,11 +41,9 @@ module.exports = {
             creator.createdEvents.push(event);
             await creator.save();
 
-            console.log(result);
             return createdEvent;
         }
         catch (err) {
-
             console.log(err);
             throw err;
         };
@@ -57,7 +55,6 @@ module.exports = {
         try {
             const event = await Event.findById(args.eventId).populate('creator');
             const user = DeleteEvent(event.creator);
-            console.log(user);
             await Event.deleteOne({ _id: args.eventId });
             await Booking.deleteMany({ event: args.eventId });
             return user;
@@ -73,7 +70,6 @@ module.exports = {
         }
         try {
             const user = KillUser(args.userId);
-            console.log(args);
             await User.deleteOne({ _id: args.userId })
             await Event.deleteMany({ creator: args.userId });
             await Booking.deleteMany({ user: args.userId });
@@ -107,32 +103,12 @@ module.exports = {
             creator.createdEvents.push(event);
             await creator.save();
 
-            console.log(result);
             return createdEvent;
         }
         catch (err) {
             console.log(err);
             throw err;
         };
-    },
-    getEventsFromUser: async ({ userId }) => {
-        try {
-            const user = await User.findOne({ _id: ObjectId(userId) });
-            if (!user) {
-                throw new Error('O Usuário não Existe.');
-            }
-            
-            var eventsFromUser = await Event.find({
-                '_id': {
-                    $in: user.createdEvents,
-                }
-            });
-
-            return eventsFromUser.map(event => transformEvent(event));
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
     },
     searchEventsFromUser: async ({ userId, searchEventsMobile }) => {
         try {
@@ -159,6 +135,7 @@ module.exports = {
                 params['date'] = {...params['date'], $lt: new Date(searchEventsMobile.finalDate) };
             }
 
+            console.log(params);
             var eventsFromUser = await Event.find(params);
 
             return eventsFromUser.map(event => transformEvent(event));

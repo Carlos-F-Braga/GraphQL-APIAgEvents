@@ -81,7 +81,6 @@ type RootQuery {
     login(email: String!, password: String!): AuthData
     getUserById(userId: ID!): User
     getUserByPhone(phone: String!): User
-    getEventsFromUser(userId: ID!): [Event!]
     searchEventsFromUser(userId: ID!, searchEventsMobile: SearchEventsMobile!): [Event!]
 }
 
