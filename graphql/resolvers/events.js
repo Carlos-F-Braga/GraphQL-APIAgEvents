@@ -109,7 +109,29 @@ module.exports = {
             console.log(err);
             throw err;
         };
-    },
+    },                                      
+    updateEventMobile: async ({ eventInputMobile, eventId }) => {
+        try {
+            const event = await Event.findOne({ _id: ObjectId(eventId) });
+            if (!event) {
+                throw new Error('Evento não existe.');
+            }
+
+            event.title = eventInputMobile.title;
+            event.description = eventInputMobile.description;
+            event.date = new Date(eventInputMobile.date);
+            event.category = eventInputMobile.category;
+            event.priority = eventInputMobile.priority;
+    
+            await event.save();
+
+            return { isUpdated: true };
+        }
+        catch (err) {
+            console.log(err);
+            throw err;
+        };
+    },                                      
     searchEventsFromUser: async ({ userId, searchEventsMobile }) => {
         try {
             const user = await User.findOne({ _id: ObjectId(userId) });
@@ -135,7 +157,6 @@ module.exports = {
                 params['date'] = {...params['date'], $lt: new Date(searchEventsMobile.finalDate) };
             }
 
-            console.log(params);
             var eventsFromUser = await Event.find(params);
 
             return eventsFromUser.map(event => transformEvent(event));
@@ -171,6 +192,19 @@ module.exports = {
             await event.remove();
             
             return { isRemoved: true };
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    getEventById: async ({ eventId }) => {
+        try {
+            const event = await Event.findOne({ _id: ObjectId(eventId) });
+            if (!event) {
+                throw new Error('Evento não existe.');
+            }
+            
+            return transformEvent(event);
         } catch (error) {
             console.log(error);
             throw error;

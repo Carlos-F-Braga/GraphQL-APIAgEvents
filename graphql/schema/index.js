@@ -36,6 +36,10 @@ type AuthData {
     tokenExpiration: Int!
 }
 
+type UpdateDataResponse {
+    isUpdated: Boolean!
+}
+
 type ChangeDataResponse {
     isChanged: Boolean!
 }
@@ -80,6 +84,7 @@ type RootQuery {
     bookings: [Booking!]!
     login(email: String!, password: String!): AuthData
     getUserById(userId: ID!): User
+    getEventById(eventId: ID!): Event
     getUserByPhone(phone: String!): User
     searchEventsFromUser(userId: ID!, searchEventsMobile: SearchEventsMobile!): [Event!]
 }
@@ -87,6 +92,7 @@ type RootQuery {
 type RootMutation {
     createEvent(eventInput: EventInput): Event
     createEventMobile(eventInputMobile: EventInputMobile!, userId: ID!): Event
+    updateEventMobile(eventInputMobile: EventInputMobile!, eventId: ID!): UpdateDataResponse
     createUser(userInput: UserInput): User
     bookEvent(eventId: ID!): Booking!
     cancelBooking(bookingId: ID!): Event!
