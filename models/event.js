@@ -21,11 +21,11 @@ const eventSchema = new Schema({
     },
     category: {
         type: Number,
-        required: true
+        default: 1  
     },
     priority: {
         type: Number,
-        required: true
+        default: 1
     },
     status: {
         type: Number,

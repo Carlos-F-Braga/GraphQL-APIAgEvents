@@ -13,11 +13,11 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        default: 'house'
     },
     password: {
         type: String,
-        required: true
+        default: 'employee'
     },
     createdEvents: [
         {
