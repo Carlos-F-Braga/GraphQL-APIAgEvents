@@ -13,9 +13,11 @@ const userSchema = new Schema({
     },
     location: {
         type: String,
+        default: 'house'
     },
     job:{
         type: String,
+        default: 'employee'
     },
     createdEvents:[
         {

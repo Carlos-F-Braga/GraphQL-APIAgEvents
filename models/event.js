@@ -21,10 +21,11 @@ const eventSchema = new Schema({
     },
     category: {
         type: Number,
-
+        default: 1  
     },
     priority: {
         type: Number,
+        default: 1
     },
     creator: {
         type: Schema.Types.ObjectId,
