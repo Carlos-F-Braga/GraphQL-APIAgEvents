@@ -13,11 +13,9 @@ const userSchema = new Schema({
     },
     location: {
         type: String,
-        required: true
     },
     job:{
         type: String,
-        required: true
     },
     createdEvents:[
         {
