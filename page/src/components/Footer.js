@@ -8,7 +8,7 @@ export default function Footer() {
     return (
         <StyledFooter>
             <Container>
-                <img style={{marginTop:"-30px", marginBottom:"-45px"}} src="./images/logo.png" alt="" />
+            <a href="http://localhost:3000/events" target="_blank" rel="noreferrer"> <img style={{marginTop:"-70px"}} src="./images/aglogo.png" alt="" /> </a>
 
                 <Flex>
           <ul>
@@ -36,7 +36,7 @@ export default function Footer() {
           <SocialIcons />
         </Flex>
 
-        <p>&copy; 2022 Github Repository Search. Todos direitos reservados</p>
+        <p style={{color:"#000"}}>&copy; 2022 Agvents - The Advance of Events. Todos direitos reservados</p>
 
             </Container>
         </StyledFooter>

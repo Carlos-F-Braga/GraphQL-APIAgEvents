@@ -9,9 +9,9 @@ import GlobalStyles from "./components/styles/Global";
 
 const theme = {
   colors: {
-    header: '#20b2aa',
-    body: '#000000',
-    footer: '#4183C4'
+    header: '#fff',
+    body: 'radial-gradient(ellipse at bottom, #033297 20%, black)',
+    footer: '#fff'
   },
   mobile: '768px'
 }

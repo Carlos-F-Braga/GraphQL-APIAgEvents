@@ -28,15 +28,15 @@ export default function Header () {
             
             <Container>
             <Nav> 
-            <a href="http://localhost:3000/events" target="_blank" rel="noreferrer"> <Logo src='./images/logo.png' alt='' /> </a>
+            <a href="http://localhost:3000/events" target="_blank" rel="noreferrer"> <Logo src='./images/aglogo.png' alt='' /> </a>
             <a href="http://localhost:3000/auth" target="_blank" rel="noreferrer">   <Button>Se Cadastre</Button> </a>
             </Nav>
             <Flex>
                 <div >
-                    <h1 color='#fff'>
+                    <h1 style={{color:'#000'}}>
                         Busque um Evento!
                     </h1>
-                    <Button bg='#b727f9' color='#fff' onClick={() => setInput(text)}>
+                    <Button bg='#0a4df5' color='#fff' onClick={() => setInput(text)}>
                         Buscar Evento
                     </Button>
 

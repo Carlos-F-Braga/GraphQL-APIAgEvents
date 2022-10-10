@@ -5,10 +5,10 @@ export default function Card ({item: {id, name, title, price, image} }) {
     console.log(image)
     return (
         <StyledCard layout={id % 2 === 0 &&  'row-reverse'}>
-            <div> 
+            <div onClick={() => window.open( 'http://localhost:3000/events')}> 
                 <h2>{title}</h2>
                 <p>{name}</p>
-                <h4>{price}</h4>
+                <h4>R${price}</h4>
             </div>
 
             <div> 
