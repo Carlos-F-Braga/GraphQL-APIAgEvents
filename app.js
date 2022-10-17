@@ -10,6 +10,7 @@ const isAuth = require('./middleware/is-auth');
 
 const app = express();
 
+
 app.use(bodyParser.json());
 
 app.use ((req, res, next) => {
@@ -30,9 +31,9 @@ app.use('/graphql', graphqlHttp({
     graphiql: true
 }));
 
-const host = process.env.HOST || '127.0.0.1' 
+const host = process.env.host || '127.0.0.1' 
 
-const port = process.env.PORT || '8000'
+const port = process.env.port || '8000'
 
 const configApi = {
     port: {
@@ -62,11 +63,16 @@ const success = "Funcionando Corretamente - Conexão Estabelecida com Sucesso"
 
 const error = "Algo deu Errado: "
 
-mongoose.connect(process.env.MONGO_CONNECTION_STRING)
-.then(() => {
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USER}:${
+    process.env.MONGO_PASSWORD
+}@cluster0.38xfe.mongodb.net/${process.env.MONGO_DB}?retryWrites=true&w=majority`
+).then(() => {
     app.listen(port);
     console.log(success);
     console.table(configApi)
 }).catch(err => {
     console.log(error, err);
 })
+
+
+
