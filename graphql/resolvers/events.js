@@ -1,27 +1,27 @@
 const Event = require('../../models/event');
 const Booking = require('../../models/booking');
 const { transformEvent, DeleteEvent, KillUser } = require('./merge');
-const { ObjectId } = require("mongodb");
 const User = require('../../models/user');
+
 
 module.exports = {
     events: async () => {
-        try {
-            const events = await Event.find()
+        try{
+        const events = await Event.find()
             return events
-                .map(event => {
-                    return transformEvent(event);
-                })
-        } catch (err) {
+            .map(event => {
+                return transformEvent(event);    
+        })
+    }   catch(err) {
             console.log(err);
             throw err;
         }
     },
     createEvent: async (args, req) => {
-        if (!req.isAuth) {
-            throw new Error('Unauthenticated!');
-        }
-        const event = new Event({
+          if(!req.isAuth) {
+              throw new Error ('Unauthenticated!');
+          }
+        const event = new Event ({
             title: args.eventInput.title,
             description: args.eventInput.description,
             price: +args.eventInput.price,
@@ -29,185 +29,61 @@ module.exports = {
             creator: req.userId
         });
         let createdEvent;
-        try {
-            const result = await event
-                .save()
+        try{
+        const result = await event
+        .save()
             createdEvent = transformEvent(result);
             const creator = await User.findById(req.userId);
-
-            if (!creator) {
-                throw new Error('Usuário não Encontrado!');
+      
+            if (!creator){
+            throw new Error('Usuário não Encontrado!');
             }
             creator.createdEvents.push(event);
             await creator.save();
-
+         
+            console.log(result);
             return createdEvent;
         }
         catch (err) {
+    
             console.log(err);
             throw err;
-        };
+        };  
     },
     cancelEvent: async (args, req) => {
-        if (!req.isAuth) {
+        if (!req.isAuth){
             throw new Error('Unauthenticated!');
         }
-        try {
+        try{
             const event = await Event.findById(args.eventId).populate('creator');
             const user = DeleteEvent(event.creator);
-            await Event.deleteOne({ _id: args.eventId });
-            await Booking.deleteMany({ event: args.eventId });
+            console.log(user);
+            await Event.deleteOne({_id: args.eventId});
+            await Booking.deleteMany({event: args.eventId});
             return user;
 
         }
-        catch (err) {
+        catch (err){
             throw err;
         }
     },
-    killUser: async (args, req) => {
-        if (!req.isAuth) {
+    killUser: async (args, req) => {   
+    if (!req.isAuth){
             throw new Error('Unauthenticated!');
         }
-        try {
-            const user = KillUser(args.userId);
-            await User.deleteOne({ _id: args.userId })
-            await Event.deleteMany({ creator: args.userId });
-            await Booking.deleteMany({ user: args.userId });
+        try{
+            const user = KillUser(args.userId); 
+            console.log(args); 
+            await User.deleteOne({_id: args.userId})
+            await Event.deleteMany({creator: args.userId}); 
+            await Booking.deleteMany({user: args.userId});
             return user;
 
         }
-        catch (err) {
+        catch (err){
             throw err;
         }
-    },
-    createEventMobile: async ({ eventInputMobile, userId }) => {
-        const event = new Event({
-            title: eventInputMobile.title,
-            description: eventInputMobile.description,
-            price: 0.00,
-            date: new Date(eventInputMobile.date),
-            status: eventInputMobile.status,
-            category: eventInputMobile.category,
-            priority: eventInputMobile.priority,
-            creator: userId
-        });
-
-        try {
-            const result = await event.save();
-            let createdEvent = transformEvent(result);
-            const creator = await User.findById(userId);
-
-            if (!creator) {
-                throw new Error('Usuário não Encontrado!');
-            }
-            creator.createdEvents.push(event);
-            await creator.save();
-
-            return createdEvent;
-        }
-        catch (err) {
-            console.log(err);
-            throw err;
-        };
-    },                                      
-    updateEventMobile: async ({ eventInputMobile, eventId }) => {
-        try {
-            const event = await Event.findOne({ _id: ObjectId(eventId) });
-            if (!event) {
-                throw new Error('Evento não existe.');
-            }
-
-            event.title = eventInputMobile.title;
-            event.description = eventInputMobile.description;
-            event.date = new Date(eventInputMobile.date);
-            event.category = eventInputMobile.category;
-            event.priority = eventInputMobile.priority;
+    }
     
-            await event.save();
 
-            return { isUpdated: true };
-        }
-        catch (err) {
-            console.log(err);
-            throw err;
-        };
-    },                                      
-    searchEventsFromUser: async ({ userId, searchEventsMobile }) => {
-        try {
-            const user = await User.findOne({ _id: ObjectId(userId) });
-            if (!user) {
-                throw new Error('O Usuário não Existe.');
-            }
-
-            var params = {
-                '_id': {
-                    $in: user.createdEvents,
-                }
-            };
-
-            if (searchEventsMobile.title) {
-                params['title'] = { $regex: '.*' + searchEventsMobile.title + '.*', $options:'i' };
-            }
-
-            if (searchEventsMobile.initialDate) {
-                params['date'] = { $gte: new Date(searchEventsMobile.initialDate) };
-            }
-            
-            if (searchEventsMobile.finalDate) {
-                params['date'] = {...params['date'], $lt: new Date(searchEventsMobile.finalDate) };
-            }
-
-            var eventsFromUser = await Event.find(params);
-
-            return eventsFromUser.map(event => transformEvent(event));
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    },
-    changeStatusEvent: async ({ eventId, status }) => {
-        try {
-            const event = await Event.findOne({ _id: ObjectId(eventId) });
-            if (!event) {
-                throw new Error('Evento não existe.');
-            }
-
-            event.status = status;
-    
-            await event.save();
-            
-            return { isChanged: true };
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    },
-    removeEvent: async ({ eventId }) => {
-        try {
-            const event = await Event.findOne({ _id: ObjectId(eventId) });
-            if (!event) {
-                throw new Error('Evento não existe.');
-            }
-            
-            await event.remove();
-            
-            return { isRemoved: true };
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    },
-    getEventById: async ({ eventId }) => {
-        try {
-            const event = await Event.findOne({ _id: ObjectId(eventId) });
-            if (!event) {
-                throw new Error('Evento não existe.');
-            }
-            
-            return transformEvent(event);
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    },
 };
